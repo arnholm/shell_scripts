@@ -1,0 +1,21 @@
+#!/bin/bash
+# for_subdirs traverses subdirectories and executes a command
+# usage:
+#    for_subdirs "do something"
+# 
+# example: for_subdirs "git pull origin"
+if [ $# -eq 0 ]; then
+    echo "No arguments supplied"
+    echo "    Usage: for_subdirs \"do something\""
+    exit 1
+fi
+
+dirlist=$(find . -mindepth 1 -maxdepth 1 -type d)
+for dir in $dirlist
+do
+  pushd $dir > /dev/null
+  echo $dir
+  $1
+  popd > /dev/null
+done
+
