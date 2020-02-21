@@ -18,7 +18,7 @@ By this we mean the basic OS setup of Kubuntu and Raspberry PI.
 ---
 
 **Clean Kubuntu** 
-  * Install clean Kubuntu under Virtual Box (if you prefer Ubuntu it works the same)
+  * Install clean Kubuntu ("Kubuntu-cross-pi") under Virtual Box (ok to use Ubuntu)
   * Give it a virtual disk of at least 30-50GB
   * Install git: sudo apt-get install git
   * Optional: configure network disks (/etc/fstab).
@@ -26,7 +26,7 @@ By this we mean the basic OS setup of Kubuntu and Raspberry PI.
 ---
   
 **Install Raspbian on the PI**
-  * enable SSH in Raspbian, use raspi-config to do it.
+  * Enable SSH in Raspbian, use raspi-config to do it.
   * Define  <a href="https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address</a>">static-ip-address</a>. 
     Use "dhcpcd method", editing /etc/dhcpcd.conf
   * Optional: configure network disks (/etc/fstab).
@@ -46,7 +46,7 @@ sudo apt-get upgrade
 
 ---
 
-**Kubuntu** : Install cross-compiler toolchain and root file system (scripts must be run with sudo)
+**Kubuntu** : Install cross-pi toolchain and root file system (scripts must be run with sudo)
 
 **cross-pi-toolchain.sh** : Installs to /opt/cross-pi-gcc (location cannot be changed)
   * Installs raspi-toolchain from https://github.com/Pro/raspi-toolchain
@@ -62,17 +62,16 @@ sudo apt-get upgrade
 By this we mean IDE and preferred libraries. This reflects my preferences, yours may be different.
 
 ---
-  
-**boost libraries** : run cross-pi-boost.sh to bild cross compiler version of boost
+ 
+**boost libraries** : run cross-pi-boost.sh to build cross-pi version of boost
 
 **cross-pi-boost.sh** : Download, build and install latest version of the boost libraries
   * Downloads from https://github.com/boostorg/boost
   * Builds and installs it to $HOME/cross-pi/3rdparty/boost
 
-
 ---
   
-**wxWidgets libraries** : run cross-pi-wxwidgets.sh to bild cross compiler version of wxWidgets
+**wxWidgets libraries** : run cross-pi-wxwidgets.sh to build cross-pi version of wxWidgets
 
 **cross-pi-wxwidgets.sh** : Download, build and install latest version of the wxWidgets libraries
   * Downloads from https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.4/wxWidgets-3.0.4.tar.bz2
@@ -80,7 +79,7 @@ By this we mean IDE and preferred libraries. This reflects my preferences, yours
 
 ---
   
-**msgpack** : run cross-pi-wxwidgets.sh to bild cross compiler version of msgpack
+**msgpack** : run cross-pi-wxwidgets.sh to build cross-pi version of msgpack
 
 **cross-pi-msgpack.sh** : Download, build and install latest version of msgpack 
   * Downloads from https://github.com/msgpack/msgpack-c.git
@@ -90,9 +89,9 @@ By this we mean IDE and preferred libraries. This reflects my preferences, yours
 
 **Code::Blocks IDE** : Either install from Kubuntu repository, or run _cross-pi-codeblocks.sh_ to get updated version
 
-**cross-pi-codeblocks.sh** : Download, build and install latest version of Code::Blocks IDE
+**cross-pi-codeblocks.sh** : Download, build and install latest version of Code::Blocks IDE under Kubuntu
   * Downloads from https://github.com/obfuscated/codeblocks_sf 
   * Builds and installs it
-  * Note that the IDE is *not* configured for cross compilation at this stage
+  * Note that the IDE is *not* configured for cross-pi at this stage
   
 ---
