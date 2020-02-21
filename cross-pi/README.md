@@ -23,6 +23,12 @@ By this we mean the basic OS setup of Kubuntu and Raspberry PI.
   * Install git: sudo apt-get install git
   * Optional: configure network disks (/etc/fstab).
 
+```
+cd $HOME
+git clone https://github.com/arnholm/shell_scripts
+```
+The cross -pi scripts are now in $HOME/shell_scripts/cross-pi
+
 ---
   
 **Install Raspbian on the PI**
@@ -43,7 +49,10 @@ I.e. cross-compiler toolchain under Kubuntu, and system root files from Raspberr
 sudo apt-get update
 sudo apt-get upgrade
 ```
-
+also install build-essential and boost development libraries in root file system, we will need it later
+```
+sudo apt-get install build-essential libboost-all-dev
+```
 ---
 
 **Kubuntu** : Install cross-pi toolchain and root file system (scripts must be run with sudo)
@@ -62,16 +71,8 @@ sudo apt-get upgrade
 By this we mean IDE and preferred libraries. This reflects my preferences, yours may be different.
 
 ---
- 
-**boost libraries** : run cross-pi-boost.sh to build cross-pi version of boost
-
-**cross-pi-boost.sh** : Download, build and install latest version of the boost libraries
-  * Downloads from https://github.com/boostorg/boost
-  * Builds and installs it to $HOME/cross-pi/3rdparty/boost
-
----
   
-**wxWidgets libraries** : run cross-pi-wxwidgets.sh to build cross-pi version of wxWidgets
+**wxWidgets libraries** : run cross-pi-wxwidgets.sh to build cross-pi version of wxWidgets. I am using a static build so I cannot use any repository version.
 
 **cross-pi-wxwidgets.sh** : Download, build and install latest version of the wxWidgets libraries
   * Downloads from https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.4/wxWidgets-3.0.4.tar.bz2
