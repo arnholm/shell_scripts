@@ -22,6 +22,9 @@ else
   DEB="--enable-debug=no"
 fi
 
+# make sure  our root folder exists
+mkdir -p $HOME/cross-pi-build
+
 # Download wxwidgets and build in a temporary, disposable folde
 wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.4/wxWidgets-3.0.4.tar.bz2 -P /tmp/build_wxwidgets
 
@@ -35,10 +38,10 @@ mkdir buildrpi
 pushd buildrpi > /dev/null 
 
 # make sure the buildroot toolchain is first in PATH so we find the correct cross-compiler 
-export PATH=$HOME/cross-pi/buildroot/output/host/usr/bin:$PATH
+export PATH=$HOME/cross-pi-build/buildroot/output/host/usr/bin:$PATH
 
 # this is where cross-compled wxWidgets will be installed
-CFG_PREFIX="$HOME/cross-pi/3rdparty/wxwidgets"
+CFG_PREFIX="$HOME/cross-pi-build/3rdparty/wxwidgets"
 
 # the target host system is Raspberry PI, a.k.a. arm-linux
 # Actually this is armV7

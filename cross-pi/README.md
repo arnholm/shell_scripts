@@ -10,89 +10,68 @@ from use of the procedures or software and makes no warranty or representation, 
 including but not limited to, any implied warranty of merchantability or fitness for a particular purpose.
 The information is provided "AS IS" and the author does not assume or accept any risk by its use._
 
+Once installed, a directory structure will be created under Kubuntu
 
+    $HOME/cross-pi             ... Clone of the cross-pi git repo with scripts
+    $HOME/cross-pi-build       ... The  build area
+                    /buildroot ... cross compiler goes here
+                    /3rdparty  ... 3rd party libraries goes here
   
+---
+
 ## System preparations
-By this we mean the basic OS setup of Kubuntu and Raspberry PI.
 
----
+This means the basic OS setup of Kubuntu and Raspberry PI.
 
-**Clean Kubuntu** 
-  * Install clean Kubuntu ("Kubuntu-cross-pi") under Virtual Box (ok to use Ubuntu)
-  * Give it a virtual disk of at least 30-50GB
-  * Install git: sudo apt-get install git git-gui
-  * Optional: configure network disks (/etc/fstab).
+**Install Kubuntu** 
+  * Install Kubuntu ("Kubuntu-cross-pi") under Virtual Box (ok to use Ubuntu)
+  * Give it a virtual disk of 40GB or larger size
+  * Install git: _sudo apt install git_
+  * From $HOME, clone the repo: _git clone https://github.com/arnholm/cross-pi_ 
+  * _Optional: configure network disks (/etc/fstab)_.
 
-```
-cd $HOME
-git clone https://github.com/arnholm/shell_scripts
-```
-The cross -pi scripts are now in $HOME/shell_scripts/cross-pi
-
----
   
 **Install Raspbian on the PI**
   * Enable SSH in Raspbian, use raspi-config to do it.
   * Define  <a href="https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address</a>">static-ip-address</a>. 
     Use "dhcpcd method", editing /etc/dhcpcd.conf
-  * Optional: configure network disks (/etc/fstab).
+  * _Optional: configure network disks (/etc/fstab)_.
 
 ---
 
-## cross-pi preparations
-I.e. cross-compiler toolchain under Kubuntu, and system root files from Raspberry PI required by cross compiler.
+## cross-pi preparations (Kubuntu)
+I.e. cross-compiler toolchain and system root required by cross compiler. Run the scripts below.
 
----
+**cross-pi-kubuntu.sh** : Installs essential system packages required
 
-**Raspberry PI** : Install the latest Raspbian updates before copying to Kubuntu
-```
-sudo apt-get update
-sudo apt-get upgrade
-```
-also install build-essential and boost development libraries in root file system, we will need it later
-```
-sudo apt-get install libgtk2.0-dev build-essential libboost-all-dev 
-```
----
-
-**Kubuntu** : Install cross-pi toolchain and root file system (scripts must be run with sudo)
-
-**cross-pi-toolchain.sh** : Installs to /opt/cross-pi-gcc (location cannot be changed)
-  * Installs raspi-toolchain from https://github.com/Pro/raspi-toolchain
-	  
-**cross-pi-rootfs.sh** : Installs to /opt/cross-pi-rootfs
-  * Current system libraries and include files are copied from the PI.
-  * The PI must be accessible via SSH 
-  * This script can also make updates if things have changed on the PI.
+**cross-pi-buildroot.sh** :  Builds and installs the cross compiler
+  * Installs to _$HOME/cross-pi-build/buildroot_
+  * This process takes ~2 hours and is not 100% automatic
+  * Please note detailed instructions as comments in the script file
 
 ---
   
-## cross-pi development tools and 3rd party libraries
-By this we mean IDE and preferred libraries. This reflects my preferences, yours may be different.
+## cross-pi 3rd party libraries and IDE (Kubuntu)
 
----
-  
-**wxWidgets libraries** : run cross-pi-wxwidgets.sh to build cross-pi version of wxWidgets. I am using a static build so I cannot use any repository version.
+This reflects my preferences, yours may be different. It is required to have completed the **cross-pi-buildroot.sh** step above before you do this before running the scripts below.
 
-**cross-pi-wxwidgets.sh** : Download, build and install latest version of the wxWidgets libraries
-  * Downloads from https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.4/wxWidgets-3.0.4.tar.bz2
-  * Builds and installs it to $HOME/cross-pi/3rdparty/wxwidgets
 
----
-  
-**msgpack** : run cross-pi-wxwidgets.sh to build cross-pi version of msgpack
+**cross-pi-boost.sh** : Builds cross-pi version of boost libraries
+  * Skip this if you don't use boost
+  * Installs to _3rdparty/boost_
 
-**cross-pi-msgpack.sh** : Download, build and install latest version of msgpack 
-  * Downloads from https://github.com/msgpack/msgpack-c.git
-  * Builds and installs it to $HOME/cross-pi/3rdparty/msgpack
+**cross-pi-wxwidgets.sh** : Builds cross-pi version of wxWidgets libraries
+  * Skip this if you don't use wxWidgets
+  * Build wxWidgets as static libraries
+  * Installs to _3rdparty/wxwidgets_
 
----
+**cross-pi-msgpack.sh** : Builds cross-oi version of msgpack 
+  * Skip this if you don't use msgpack
+  * Installs to _3rdparty/msgpack_
 
-**Code::Blocks IDE** : Either install from Kubuntu repository, or run _cross-pi-codeblocks.sh_ to get updated version
-
-**cross-pi-codeblocks.sh** : Download, build and install latest version of Code::Blocks IDE under Kubuntu
-  * Downloads from https://github.com/obfuscated/codeblocks_sf 
-  * Builds and installs it
-  * Note that the IDE is *not* configured for cross-pi at this stage
+**cross-pi-codeblocks.sh** : Installs the Code::Blocks IDE to /usr
+  * Skip this if you don't use Code::Blocks
+  * Alternatively, use the older version provided by the Kubuntu package manager
+  * Installs to _/usr_
   
 ---

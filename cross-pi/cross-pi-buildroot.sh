@@ -7,8 +7,8 @@
 #
 # Fetch the latest buildroot
 cd $HOME
-mkdir -p cross-pi
-pushd cross-pi > /dev/null 
+mkdir -p cross-pi-build
+pushd cross-pi-build > /dev/null 
 git clone https://git.buildroot.net/buildroot
 
 # Move to the buildroot directory 
