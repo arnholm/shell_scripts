@@ -20,7 +20,7 @@ By this we mean the basic OS setup of Kubuntu and Raspberry PI.
 **Clean Kubuntu** 
   * Install clean Kubuntu ("Kubuntu-cross-pi") under Virtual Box (ok to use Ubuntu)
   * Give it a virtual disk of at least 30-50GB
-  * Install git: sudo apt-get install git
+  * Install git: sudo apt-get install git git-gui
   * Optional: configure network disks (/etc/fstab).
 
 ```
@@ -51,7 +51,7 @@ sudo apt-get upgrade
 ```
 also install build-essential and boost development libraries in root file system, we will need it later
 ```
-sudo apt-get install build-essential libboost-all-dev
+sudo apt-get install libgtk2.0-dev build-essential libboost-all-dev 
 ```
 ---
 
