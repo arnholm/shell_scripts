@@ -1,6 +1,7 @@
 #!/bin/bash
 # cross-pi-codeblocks.sh
 # This script downloads, builds and installs Code::Blocks under debian/ubuntu
+# The installation will be in /usr , it will override any system package
 # Run this script with sudo privilege
 
 if [ "$EUID" -ne 0 ]
