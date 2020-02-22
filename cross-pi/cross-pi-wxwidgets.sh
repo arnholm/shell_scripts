@@ -46,7 +46,7 @@ export PATH=/opt/cross-pi-gcc/bin:$PATH
 
 # set the cross-pi root file system as prefix
 # set the host as arm-linux
-../configure --prefix=/opt/cross-pi-rootfs/usr --host=arm-linux ${ENABLE} ${DISABLE} ${XJPEG} ${XTIFF} ${ODBC} ${DEB}
+../configure --prefix=/opt/cross-pi-rootfs/usr --host=arm-linux-gnueabihf ${ENABLE} ${DISABLE} ${XJPEG} ${XTIFF} ${ODBC} ${DEB}
 if [ $? != 0 ]; then exit -1 ; fi
 
 make
