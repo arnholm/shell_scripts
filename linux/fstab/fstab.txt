@@ -1,0 +1,3 @@
+
+//10.0.0.2/ca             /NAS_ca          cifs   credentials=/root/smb/credentials,rw,iocharset=utf8,uid=1000,gid=1000,vers=1.0 0 0
+//10.0.0.2/openbzr        /NAS_openbzr     cifs   credentials=/root/smb/credentials,rw,iocharset=utf8,uid=1000,gid=1000,vers=1.0 0 0
