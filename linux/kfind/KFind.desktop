@@ -1,0 +1,23 @@
+# Install right-clik KFind pop-up menu entry for folders in Dolphin
+# =================================================================
+# OS  : Kubuntu 20.04
+#
+# How to install:
+#    close Dolphin
+#    mkdir             $HOME/.local/share/kservices5/ServiceMenus/
+#    copy this file to $HOME/.local/share/kservices5/ServiceMenus/KFind.desktop
+#    kbuildsycoca5
+
+[Desktop Entry]
+Type=Service
+Icon=smiley-shape
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;
+Actions=KFind;
+Encoding=UTF-8
+X-KDE-Priority=TopLevel
+
+[Desktop Action KFind]
+Name=KFind...
+Icon=kfind
+Exec=kfind %f
