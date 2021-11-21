@@ -1,9 +1,9 @@
-# Install right-clik KFind pop-up menu entry for folders in Dolphin
+# right-click "KFind..." folder context menu in KDE/Dolphin
 
 OS  : Kubuntu 20.04
 
 
-How to install:
+## How to install:
 
 1. close Dolphin
 2. mkdir $HOME/.local/share/kservices5/ServiceMenus/
@@ -11,6 +11,6 @@ How to install:
 4. kbuildsycoca5
 
 
-How to use:
+## How to use:
 
 ![](KFind.png)
