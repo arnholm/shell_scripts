@@ -3,12 +3,20 @@
 #  Migrate an existing github repository to gitlab
 #  ===============================================
 #   from: https://github.com/<username>/<repository>   (must exist)
-#   to  : https://gitlab.com/<username>/<repository>   (must exist, completely empty)
+#   to  : https://gitlab.com/<username>/<repository>   (will be created by 'git push')
 #
 #   via : ./<repository>.git                           (must exist, local mirror)
 #         ( $git clone --mirror https://github.com/<username>/<repository> )
+# 
+#   The gitlab project created by git push is private by default. 
+#   To change it to public, in gitlab find the new project and do
+#     - Project -> Settings -> General
+#     - Find "Visibility, project features, permissions" and press the "Expand" button.
+#     - Change Project visibility from Private to Public
+#     - Scroll down and press "Save changes"
 #
-#  Assumptions:
+#  Assumptions when running this script:
+#     - the gitlab project must either not exist or pre-exist but completely empty
 #     - current dir is one level up from the local mirror
 #     - the user has set up credentials to write to gitlab, e.g. using 
 #       gitlab personal access token: https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html
