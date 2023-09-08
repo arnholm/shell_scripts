@@ -54,8 +54,12 @@ git-remote-url-reachable() {
 #   fi
 #
 # Construct the remote URLs and check that they are reachable
-github_remote="https://github.com/${username}/${repository}"
-gitlab_remote="https://gitlab.com/${username}/${repository}"
+# Include the .git suffix in the remote URLs in order to avoid redirection 
+# warnings in push/pull operations later. ref 
+# https://stackoverflow.com/questions/53012504/what-does-the-warning-redirecting-to-actually-mean
+# 
+github_remote="https://github.com/${username}/${repository}.git"
+gitlab_remote="https://gitlab.com/${username}/${repository}.git"
 if git-remote-url-reachable "$github_remote"; then
    echo "OK github repo    reachable: $github_remote"
 else 
@@ -72,12 +76,20 @@ fi
 # go to directory of local mirror 
 pushd $local_mirror
 #
-# update local mirror: fetch from github
-git fetch
+# update local mirror: fetch from origin (i.e. github)
+git fetch origin
 #
-# modify the git remote URLs
+# modify the git remotes so that origin points to gitlab instead
 git remote add     github $github_remote
 git remote set-url origin $gitlab_remote
+#
+# Also: make sure to prune origin, or else there will be an 'orphaned'
+# github/master branch in the local mirror after manipulating the remotes 
+# causing problems and errors when pushing.
+#
+# git prune master solves that problem
+#
+git prune master
 #
 # Now we can push to the new origin, this pushes all tags and branches
 git push --set-upstream origin
@@ -86,4 +98,4 @@ git push --set-upstream origin
 echo "updated git remotes:"
 git remote -v
 popd
-echo "repository $repository migrated!"
+echo "repository $repository migrated! Remember to set project visibility to 'Public'."
